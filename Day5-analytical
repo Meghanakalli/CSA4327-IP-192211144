@@ -1,0 +1,76 @@
+1.<?php
+// Check if cookies are enabled
+if(isset($_COOKIE['test_cookie'])) {
+    $cookie_enabled = true;
+} else {
+    $cookie_enabled = false;
+    setcookie('test_cookie', 'test', time() + 3600); // Set a test cookie
+}
+
+// Modify cookie values
+if(isset($_COOKIE['user'])) {
+    $user = $_COOKIE['user'];
+    // Modify the value
+    $new_value = "New Value";
+    setcookie('user', $new_value, time() + (86400 * 30), "/"); // Set the modified cookie
+    $message = "Cookie 'user' has been modified. Old value: $user, New value: $new_value";
+} else {
+    // If the cookie doesn't exist, set a new one
+    $user = "John Doe";
+    setcookie('user', $user, time() + (86400 * 30), "/"); // Set the initial cookie
+    $message = "Cookie 'user' has been set with the value: $user";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Check and Modification</title>
+</head>
+<body>
+    <?php if($cookie_enabled): ?>
+        <p>Cookies are enabled.</p>
+    <?php else: ?>
+        <p>Cookies are disabled. Please enable cookies to use this website.</p>
+    <?php endif; ?>
+
+    <p><?php echo $message; ?></p>
+</body>
+</html>
+
+2.<?php
+// Create the $states variable
+$states = "Mississippi, Alabama, Massachusetts, Kansas";
+
+// Task (a): Search for a word in $states that ends in "xas"
+preg_match('/\b\w*xas\b/', $states, $matches_a);
+$word_ends_xas = isset($matches_a[0]) ? $matches_a[0] : "No word ending in 'xas' found";
+
+// Task (b): Search for the word that begins with "M" and ends with "s"
+preg_match('/\bM\w*s\b/', $states, $matches_b);
+$word_starts_M_ends_s = isset($matches_b[0]) ? $matches_b[0] : "No word starting with 'M' and ending with 's' found";
+
+// Task (c): Output the array $statesArray to the screen
+$statesArray = explode(", ", $states);
+
+// Output the results
+echo "Word ending in 'xas': $word_ends_xas<br>";
+echo "Word starting with 'M' and ending with 's': $word_starts_M_ends_s<br>";
+echo "States array: ";
+print_r($statesArray);
+?>
+
+3.<?php
+// Set the cookie named "user" with the value "John" and expiration after 30 days
+setcookie('user', 'John', time() + (86400 * 30), "/"); // 86400 seconds = 1 day
+
+// Retrieve the cookie value if it exists
+if(isset($_COOKIE['user'])) {
+    $user = $_COOKIE['user'];
+    echo "Cookie 'user' has been set and its value is: $user";
+} else {
+    echo "Cookie 'user' is not set";
+}
+?>
